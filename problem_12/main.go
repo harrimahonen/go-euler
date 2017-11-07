@@ -1,11 +1,14 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 func main(){
-	result := 0
-	x := 2
-	triangle := 1
+	result := 1
+	triangle := 0
+	x := 1
 	for result < 500 {
 		result = getDivisors(triangle)
 		fmt.Println("trying ", result, triangle)
@@ -17,13 +20,16 @@ func main(){
 }
 
 func getDivisors(num int) int{
-	divs := 1
-	if num == 1 {return 1}
+	divs := 0
+	sqrt := int(math.Sqrt(float64(num)))
 
-	for x := 1; x <= num/2+1; x++ {
+	for x := 1; x <= sqrt; x++ {
 		if num % x == 0 {
-			divs++
+			divs = divs + 2
 		}
+	}
+	if sqrt * sqrt == num {
+		divs--
 	}
 	return divs
 }
